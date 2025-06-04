@@ -1,8 +1,8 @@
 ---
 name: Checks
- 
+
 on: [push]
- 
+
 jobs:
   test-lint:
     name: Test and Lint
@@ -19,3 +19,9 @@ jobs:
         run: docker compose run --rm app sh -c "python manage.py wait_for_db && python manage.py test"
       - name: Lint
         run: docker compose run --rm app sh -c "flake8"
+services:
+  db:
+    deploy:
+      resources:
+        limits:
+          memory: 512M
